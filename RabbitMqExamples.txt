@@ -1,0 +1,81 @@
+https://www.cloudamqp.com/blog/2015-09-03-part4-rabbitmq-for-beginners-exchanges-routing-keys-bindings.html
+https://www.cloudamqp.com/blog/2015-05-27-part3-rabbitmq-for-beginners_the-management-interface.html
+
+https://dzone.com/articles/spring-boot-profiles-1
+http://www.springboottutorial.com/spring-boot-profiles
+https://www.baeldung.com/configuration-properties-in-spring-boot
+https://stackoverflow.com/questions/38728668/spring-rabbitmq-using-manual-channel-acknowledgement-on-a-service-with-rabbit
+
+https://www.rabbitmq.com/confirms.html
+
+java -cp %RMQ_CLASSPATH% Recv
+
+
+direct exchange uses default exchange
+binding key = routing key
+example shopping cart events
+
+Exchange:Shopping_events_exchange
+Queues:
+	Grocery queue:
+		Binding Key : Groceries
+	Electronics queue:
+		Binding Key : electronies
+Message1 :
+	Routing Key : Groceries
+Message2 :
+	Routing Key : electronies
+	
+Topic Exchange:
+Routing Pattern allows 
+* - 1 word
+# - 0 or more words
+Topic Exchange:
+	Routing pattern is allowed for binding key. 
+
+India.Maharashtra.Thane
+Country.state.district
+
+queue1 - *.Maharastra.Thane
+queue2 - India.#
+queue3 - *.Rajasthan.*
+queue4 - #.Pune
+
+
+Fanout Exchange:
+Messages are routed to all queues bounded to the exchange.
+Routing and bounding keys if provided will be ignored.
+when same message is to be send to different consumer who may perform different task with the msg.
+Example salary is credited this msg will be send to :
+icici bank - home loan taken
+hdfc bank - car loan
+kotak bank - personal loan
+
+
+Header Exchange:
+similar to Topic Exchange.
+Routing is done based on header values instead of routing keys.
+Message is considered matching if the value of header equals value specified during binding.
+x-match - special argument which is added to binding between exchange and queue which tells
+whether all values of header(k-v) pair needs to be match or any single will done
+x-match - has 2 options any or all.
+all - all header values must match.
+any - any means atleast 1 header value should match.
+headers can be constructed using wide variety of data integer or hash.
+
+Example:
+
+Message1:format=json;type=info;token=a1234
+queue1: Binding : format=json;type=info;token=a1234;x-match=all
+
+queue2: Binding : format=json;x-match=any
+
+
+mvn archetype:generate -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=pom-root -DarchetypeVersion=RELEASE
+
+
+queueDeclare(java.lang.String queue, boolean passive, boolean durable, boolean exclusive, boolean autoDelete, java.util.Map<java.lang.String,java.lang.Object> arguments) 
+
+in fanout exchange message publish to exchange is delivered to all the queues. but if there are multiple consumers attached then message will be delivered
+in rr fashion to consumers and it will be recieved by all queues in respective consumers.
+
