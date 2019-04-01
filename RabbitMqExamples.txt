@@ -79,3 +79,6 @@ queueDeclare(java.lang.String queue, boolean passive, boolean durable, boolean e
 in fanout exchange message publish to exchange is delivered to all the queues. but if there are multiple consumers attached then message will be delivered
 in rr fashion to consumers and it will be recieved by all queues in respective consumers.
 
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl start_app
