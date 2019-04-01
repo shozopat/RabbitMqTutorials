@@ -20,8 +20,8 @@ public class DirectService {
 	@Autowired
 	DirectExchange exchange;
 	
-	public void sendMessage(String msg) {
+	public void sendMessage(String msg, String routingKey) {
 		
-		rabbitTemplate.convertAndSend(exchange.getName(),"",msg);
+		rabbitTemplate.convertAndSend(exchange.getName(),routingKey,msg);
 	}
 }

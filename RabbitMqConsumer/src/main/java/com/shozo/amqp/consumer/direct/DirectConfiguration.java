@@ -2,19 +2,20 @@ package com.shozo.amqp.consumer.direct;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile("fanout")
+@Profile("direct")
 @Configuration
-public class FanOutConfiguration {
+public class DirectConfiguration {
 	
 	@Bean
-	public FanoutExchange fanout() {
-		return new FanoutExchange("fanout");
+	public DirectExchange fanout() {
+		return new DirectExchange("direct");
 	}
 	
 	@Bean
@@ -28,13 +29,13 @@ public class FanOutConfiguration {
 	}
 	
 	@Bean
-	public Binding firstQueueBinding(FanoutExchange exchange, Queue firstQueue) {
-		return BindingBuilder.bind(firstQueue).to(exchange);
+	public Binding firstQueueBinding(DirectExchange exchange, Queue firstQueue) {
+		return BindingBuilder.bind(firstQueue).to(exchange).with("black");
 	}
 	
 	@Bean
-	public Binding secondQueueBinding(FanoutExchange exchange, Queue secondQueue) {
-		return BindingBuilder.bind(secondQueue).to(exchange);
+	public Binding secondQueueBinding(DirectExchange exchange, Queue secondQueue) {
+		return BindingBuilder.bind(secondQueue).to(exchange).with("green");
 	}
 	
 }

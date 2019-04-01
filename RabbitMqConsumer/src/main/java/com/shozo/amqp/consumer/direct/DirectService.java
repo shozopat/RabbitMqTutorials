@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-@Profile("fanout")
+@Profile("direct")
 @Service
-public class FanOutService {
+public class DirectService {
 
 	
 	@RabbitListener(queues="#{firstQueue.name}")
