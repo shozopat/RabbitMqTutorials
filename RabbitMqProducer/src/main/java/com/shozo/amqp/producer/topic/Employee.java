@@ -8,6 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.context.annotation.Profile;
+
+@Profile("topic")
 @Entity
 public class Employee implements Serializable{
 
