@@ -3,6 +3,9 @@ package com.shozo.amqp.consumer.topic;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import org.springframework.context.annotation.Profile;
+
+@Profile("topic")
 public class Employee implements Serializable{
 
 

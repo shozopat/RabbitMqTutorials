@@ -30,7 +30,6 @@ public class EmployeeService {
 	}
 
 	public List<Employee> getEmployees() {
-		
 		return dao.findAll();
 	}
 	
@@ -39,7 +38,6 @@ public class EmployeeService {
 		Employee e = dao.findById(eid).get();
 		dao.deleteById(eid);
 		rabbitTemplate.convertAndSend(exchange.getName(), "delete.employee", e);
-		
 		return e;
 	}
 

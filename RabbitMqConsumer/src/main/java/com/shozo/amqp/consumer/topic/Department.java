@@ -5,7 +5,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.context.annotation.Profile;
+
 @Entity
+@Profile("topic")
 public class Department {
 
 	@Id

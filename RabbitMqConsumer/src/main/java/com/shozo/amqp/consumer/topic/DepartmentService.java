@@ -3,8 +3,10 @@ package com.shozo.amqp.consumer.topic;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+@Profile("topic")
 @Service
 public class DepartmentService {
 

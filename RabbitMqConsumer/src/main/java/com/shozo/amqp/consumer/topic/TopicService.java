@@ -13,16 +13,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class TopicService {
 
+	@Autowired
+	DepartmentService departmentService;
 	
-	@RabbitListener(queues="#{firstQueue.name}")
-	public void recieveMessage1(String msg) {
-		
-		System.out.println("Message recieved by Queue 1 is "+msg);
+	@RabbitListener(queues="#{addEmployee.name}")
+	public void incrementEmployeeCount(Employee employee) throws InterruptedException {
+		System.out.println("in incrementEmployeeCount ");
+		System.out.println(employee);
+		departmentService.incrementEmployeeCount(employee);
 	}
 	
-	@RabbitListener(queues="#{secondQueue.name}")
-	public void recieveMessage2(String msg) {
-		
-		System.out.println("Message recieved by Queue 2 is "+msg);
+	@RabbitListener(queues="#{deleteEmployee.name}")
+	public void decrementEmployeeCount(Employee employee) throws InterruptedException {
+		System.out.println("in decrementEmployeeCount ");
+		departmentService.decrementEmployeeCount(employee);
 	}
 }

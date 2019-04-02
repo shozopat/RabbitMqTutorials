@@ -5,6 +5,10 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,28 +18,39 @@ import org.springframework.context.annotation.Profile;
 public class TopicConfiguration {
 	
 	@Bean
-	public DirectExchange fanout() {
-		return new DirectExchange("topic");
+	public TopicExchange fanout() {
+		return new TopicExchange("topic");
 	}
 	
 	@Bean
-	public Queue firstQueue() {
-		return new Queue("queue1");
+	public Queue addEmployee() {
+		return new Queue("addEmployee");
 	}
 	
 	@Bean
-	public Queue secondQueue() {
-		return new Queue("queue2");
+	public Queue deleteEmployee() {
+		return new Queue("deleteEmployee");
 	}
 	
 	@Bean
-	public Binding firstQueueBinding(DirectExchange exchange, Queue firstQueue) {
-		return BindingBuilder.bind(firstQueue).to(exchange).with("black");
+	public Binding addEmployeeBinding(TopicExchange exchange, Queue addEmployee) {
+		return BindingBuilder.bind(addEmployee).to(exchange).with("add.*");
 	}
 	
 	@Bean
-	public Binding secondQueueBinding(DirectExchange exchange, Queue secondQueue) {
-		return BindingBuilder.bind(secondQueue).to(exchange).with("green");
+	public Binding deleteEmployeeBinding(TopicExchange exchange, Queue deleteEmployee) {
+		return BindingBuilder.bind(deleteEmployee).to(exchange).with("delete.*");
 	}
 	
+    @Bean
+    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+        final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
+        return rabbitTemplate;
+    }
+
+    @Bean
+    public Jackson2JsonMessageConverter producerJackson2MessageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
 }
