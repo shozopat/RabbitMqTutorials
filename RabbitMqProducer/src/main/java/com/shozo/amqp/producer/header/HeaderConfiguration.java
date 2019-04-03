@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Profile;
 public class HeaderConfiguration {
 	
 	@Bean
-	public HeadersExchange fanout() {
-		return new HeadersExchange("header");
+	public HeadersExchange header() {
+		return new HeadersExchange("headerExchange");
 	}
 }

@@ -25,6 +25,7 @@ public class HeaderService {
 	
 	public void sendMessage(String format, String type, String msg) {
 		
+		System.out.println("sending format "+format+" type "+type);
 		Message message = MessageBuilder.withBody(msg.getBytes())
 									.setHeader("format", format)
 									.setHeader("type", type)

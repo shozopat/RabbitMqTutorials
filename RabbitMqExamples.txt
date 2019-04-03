@@ -1,12 +1,13 @@
 https://www.cloudamqp.com/blog/2015-09-03-part4-rabbitmq-for-beginners-exchanges-routing-keys-bindings.html
 https://www.cloudamqp.com/blog/2015-05-27-part3-rabbitmq-for-beginners_the-management-interface.html
-
+https://grokonez.com/spring-framework/spring-amqp/springboot-rabbitmq-headers-exchange
 https://dzone.com/articles/spring-boot-profiles-1
 http://www.springboottutorial.com/spring-boot-profiles
 https://www.baeldung.com/configuration-properties-in-spring-boot
 https://stackoverflow.com/questions/38728668/spring-rabbitmq-using-manual-channel-acknowledgement-on-a-service-with-rabbit
-
 https://www.rabbitmq.com/confirms.html
+
+
 
 java -cp %RMQ_CLASSPATH% Recv
 
@@ -45,7 +46,7 @@ queue4 - #.Pune
 Fanout Exchange:
 Messages are routed to all queues bounded to the exchange.
 Routing and bounding keys if provided will be ignored.
-when same message is to be send to different consumer who may perform different task with the msg.
+when same message is to be send to different consumers who may perform different task with the msg.
 Example salary is credited this msg will be send to :
 icici bank - home loan taken
 hdfc bank - car loan
