@@ -59,9 +59,9 @@ public class StatsCalculatorService {
 		d.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		Dataset dataset = dao.save(d);
 		
-		//String filePath = "D:\\RabbitMq\\data\\"+dataset.getDatasetId()+"-"+multipartFile.getOriginalFilename();
 		String filePath = dataset.getDatasetId()+"-"+multipartFile.getOriginalFilename();
-		multipartFile.transferTo(new File("D:\\RabbitMq\\data\\"+filePath));
+		//multipartFile.transferTo(new File("D:\\RabbitMq\\data\\"+filePath));
+		multipartFile.transferTo(new File("D:\\Programs\\RabbitMq\\tempData\\"+filePath));
 		ExecutorService executor = Executors.newCachedThreadPool();
 		executor.execute(() -> sendMessage(dataset.getDatasetId(), filePath, columns));
 	}

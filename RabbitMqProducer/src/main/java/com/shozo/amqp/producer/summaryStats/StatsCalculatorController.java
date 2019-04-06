@@ -3,6 +3,7 @@ package com.shozo.amqp.producer.summaryStats;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -42,7 +43,7 @@ public class StatsCalculatorController {
 	}
 	
 	@GetMapping("{id}")
-	public HashMap getStatsForDataset(@PathVariable("id") Integer id) throws JsonParseException, JsonMappingException, IOException {
+	public Map getStatsForDataset(@PathVariable("id") Integer id) throws JsonParseException, JsonMappingException, IOException {
 		return service.getStatsForDataset(id);
 	}
 }
