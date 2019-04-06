@@ -9,7 +9,8 @@ channel.exchange_declare(exchange='direct', exchange_type='direct', durable=True
 
 def statsCalculator(filePath, cols, id):
 	#/mnt/d/RabbitMq/pythonCode
-	newPath = '/mnt/d/RabbitMq/data/'+filePath
+	#newPath = '/mnt/d/RabbitMq/data/'+filePath
+	newPath = 'D:/Programs/RabbitMq/tempData/'+filePath
 	df = pd.read_csv(newPath)
 	columns=[];maxs = [];sums=[];mins=[];counts=[];medians=[];stddevs=[];vars=[];means=[];
 	cols=['age', 'salary', 'height', 'weight']
@@ -39,7 +40,6 @@ def statsCalculator(filePath, cols, id):
 	return data
 	
 #{'file': 'D:\\RabbitMq\\data\\timepass.csv2.csv', 'columns': 'age,salary,height,weight', 'id': '2'}
-
 def callback(ch, method, properties, body):
 	print(" [x] %r:%r" % (method.routing_key, body))
 	input = json.loads(body)
@@ -56,8 +56,7 @@ def sendMessage(result):
 	
 channel.queue_declare('statsCalQueue')
 channel.queue_bind(exchange='direct', queue='statsCalQueue', routing_key='statsCal')
-
-print(' [*] Waiting for logs. To exit press CTRL+C')
+print(' Waiting for Messages........')
 
 channel.basic_consume(queue='statsCalQueue', on_message_callback=callback, auto_ack=True)
 channel.start_consuming()
