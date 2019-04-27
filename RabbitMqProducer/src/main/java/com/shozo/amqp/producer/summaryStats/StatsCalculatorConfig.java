@@ -37,7 +37,6 @@ public class StatsCalculatorConfig {
 		return BindingBuilder.bind(resultQueue).to(exchange).with("statsResult");
 	}
 	
-    @Bean("jsonTemplate")
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());

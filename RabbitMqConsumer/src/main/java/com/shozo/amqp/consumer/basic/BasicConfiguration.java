@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class BasicConfiguration {
 
-/*	@Bean
+	@Bean
 	public Queue hello() {
 		return new Queue("hello",false,false,false);
 	}
-*/
+
 }

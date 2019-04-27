@@ -8,9 +8,7 @@ https://stackoverflow.com/questions/38728668/spring-rabbitmq-using-manual-channe
 https://www.rabbitmq.com/confirms.html
 
 
-
 java -cp %RMQ_CLASSPATH% Recv
-
 
 direct exchange uses default exchange
 binding key = routing key
@@ -71,9 +69,7 @@ queue1: Binding : format=json;type=info;token=a1234;x-match=all
 
 queue2: Binding : format=json;x-match=any
 
-
 mvn archetype:generate -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=pom-root -DarchetypeVersion=RELEASE
-
 
 queueDeclare(java.lang.String queue, boolean passive, boolean durable, boolean exclusive, boolean autoDelete, java.util.Map<java.lang.String,java.lang.Object> arguments) 
 
@@ -83,3 +79,24 @@ in rr fashion to consumers and it will be recieved by all queues in respective c
 rabbitmqctl stop_app
 rabbitmqctl reset
 rabbitmqctl start_app
+
+Types of exchanges:
+
+topic
+header
+fanout
+Direct
+
+
+profiles:
+
+basic
+fanout
+taskqueue
+direct
+header
+stats
+topic
+
+java -jar -Dspring.profiles.active=basic target\RabbitMqProducer-1.0.0.jar --server.port=8081 
+java -jar -Dspring.profiles.active=basic target\RabbitMqConsumer-1.0.0.jar --server.port=8082 
