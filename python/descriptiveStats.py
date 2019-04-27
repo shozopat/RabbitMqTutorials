@@ -8,8 +8,6 @@ channel = connection.channel()
 channel.exchange_declare(exchange='direct', exchange_type='direct', durable=True)
 
 def statsCalculator(filePath, cols, id):
-	#newPath = '/mnt/d/RabbitMq/data/'+filePath
-	#newPath = 'D:/Programs/RabbitMq/tempData/'+filePath
 	df = pd.read_csv(filePath)
 	columns=[];maxs = [];sums=[];mins=[];counts=[];medians=[];stddevs=[];vars=[];means=[];
 	cols=['age', 'salary', 'height', 'weight']
