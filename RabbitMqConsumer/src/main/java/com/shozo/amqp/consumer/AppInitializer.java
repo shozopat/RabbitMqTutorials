@@ -8,10 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.shozo.amqp.consumer.topic.Department;
-import com.shozo.amqp.consumer.topic.DepartmentDao;
+import com.shozo.amqp.consumer.empdep.Department;
+import com.shozo.amqp.consumer.empdep.DepartmentDao;
 
-@Profile("topic")
+@Profile("empdep")
 @Component
 public class AppInitializer implements CommandLineRunner {
 

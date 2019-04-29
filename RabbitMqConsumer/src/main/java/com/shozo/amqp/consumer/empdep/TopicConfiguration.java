@@ -1,4 +1,4 @@
-package com.shozo.amqp.consumer.topic;
+package com.shozo.amqp.consumer.empdep;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile("topic")
+@Profile("empdep")
 @Configuration
 public class TopicConfiguration {
 	
@@ -23,60 +23,25 @@ public class TopicConfiguration {
 	}
 	
 	@Bean
-	public Queue indiaQueue() {
-		return new Queue("india");
-	}
-	
-	
-	@Bean
-	public Queue indiaMaharashtraQueue() {
-		return new Queue("indiaMaharashtra");
+	public Queue addEmployee() {
+		return new Queue("addEmployee");
 	}
 	
 	@Bean
-	public Queue thaneQueue() {
-		return new Queue("thane");
+	public Queue deleteEmployee() {
+		return new Queue("deleteEmployee");
 	}
 	
 	@Bean
-	public Queue indiaThaneQueue() {
-		return new Queue("indiathane");
-	}
-	
-	
-	@Bean
-	public Queue mumbaiQueue() {
-		return new Queue("mumbai");
-	}
-	
-	
-	@Bean
-	public Binding indiaQueueBinding(TopicExchange exchange, Queue indiaQueue) {
-		return BindingBuilder.bind(indiaQueue).to(exchange).with("india.#");
+	public Binding addEmployeeBinding(TopicExchange exchange, Queue addEmployee) {
+		return BindingBuilder.bind(addEmployee).to(exchange).with("add.*");
 	}
 	
 	@Bean
-	public Binding indiaMaharashtraBinding(TopicExchange exchange, Queue indiaMaharashtraQueue) {
-		return BindingBuilder.bind(indiaMaharashtraQueue).to(exchange).with("india.maharashtra.*");
+	public Binding deleteEmployeeBinding(TopicExchange exchange, Queue deleteEmployee) {
+		return BindingBuilder.bind(deleteEmployee).to(exchange).with("delete.*");
 	}
 	
-	@Bean
-	public Binding thaneBinding(TopicExchange exchange, Queue thaneQueue) {
-		return BindingBuilder.bind(thaneQueue).to(exchange).with("*.*.thane");
-	}
-	
-	
-	@Bean
-	public Binding indiaThaneBinding(TopicExchange exchange, Queue indiaThaneQueue) {
-		return BindingBuilder.bind(indiaThaneQueue).to(exchange).with("india.*.thane");
-	}
-	
-	@Bean
-	public Binding mumbaiBinding(TopicExchange exchange, Queue mumbaiQueue) {
-		return BindingBuilder.bind(mumbaiQueue).to(exchange).with("*.*.mumbai");
-	}
-	
-
     @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);

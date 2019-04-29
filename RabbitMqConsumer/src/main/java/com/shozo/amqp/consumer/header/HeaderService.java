@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.shozo.amqp.consumer.topic.Employee;
+import com.shozo.amqp.consumer.empdep.Employee;
 
 @Profile("header")
 @Service

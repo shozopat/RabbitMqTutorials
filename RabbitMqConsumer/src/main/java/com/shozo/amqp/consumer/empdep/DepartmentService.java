@@ -1,4 +1,4 @@
-package com.shozo.amqp.consumer.topic;
+package com.shozo.amqp.consumer.empdep;
 
 
 import java.util.List;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-@Profile("topic")
+@Profile("empdep")
 @Service
 public class DepartmentService {
 

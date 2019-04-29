@@ -1,4 +1,4 @@
-package com.shozo.amqp.consumer.topic;
+package com.shozo.amqp.consumer.empdep;
 
 
 import javax.persistence.Column;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import org.springframework.context.annotation.Profile;
 
 @Entity
-@Profile("topic")
+@Profile("empdep")
 public class Department {
 
 	@Id
