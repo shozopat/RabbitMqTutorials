@@ -1,40 +1,33 @@
-package com.shozo.amqp.producer.topic;
-
+package com.shozo.amqp.consumer.empdep;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import org.springframework.context.annotation.Profile;
 
-@Profile("topic")
-@Entity
+@Profile("empdep")
 public class Employee implements Serializable{
 
-	private static final long serialVersionUID = 2373041735506378127L;
 
-	@Id
+	private static final long serialVersionUID = 2373041735506378127L;
+	
 	Integer eId;
 	
-	@Column
+
 	String name;
 	
-	@Column
+
 	Integer salary;
 	
-	@Column
+
 	Integer age;
 	
-	@Column
+
 	Integer dId;
 	
-	@Column
+
 	String dname;
 	
-	@Column
 	Timestamp joiningDate;
 
 	public Employee() {
@@ -49,19 +42,6 @@ public class Employee implements Serializable{
 		this.age = age;
 		this.dId = dId;
 		this.dname = dname;
-	}
-
-	
-	public Employee(Integer eId, String name, Integer salary, Integer age, Integer dId, String dname,
-			Timestamp joiningDate) {
-		super();
-		this.eId = eId;
-		this.name = name;
-		this.salary = salary;
-		this.age = age;
-		this.dId = dId;
-		this.dname = dname;
-		this.joiningDate = joiningDate;
 	}
 
 	public Integer geteId() {
@@ -120,11 +100,25 @@ public class Employee implements Serializable{
 		this.joiningDate = joiningDate;
 	}
 
+	public Employee(Integer eId, String name, Integer salary, Integer age, Integer dId, String dname,
+			Timestamp joiningDate) {
+		super();
+		this.eId = eId;
+		this.name = name;
+		this.salary = salary;
+		this.age = age;
+		this.dId = dId;
+		this.dname = dname;
+		this.joiningDate = joiningDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [eId=" + eId + ", name=" + name + ", salary=" + salary + ", age=" + age + ", dId=" + dId
-				+ ", dname=" + dname + "]";
+				+ ", dname=" + dname + ", joiningDate=" + joiningDate + "]";
 	}
+	
+	
 	
 	
 }

@@ -1,11 +1,6 @@
 package com.shozo.amqp.consumer.topic;
 
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +8,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class TopicService {
 
-	@Autowired
-	DepartmentService departmentService;
-	
-	@RabbitListener(queues="#{addEmployee.name}")
-	public void incrementEmployeeCount(Employee employee) throws InterruptedException {
-		System.out.println("in incrementEmployeeCount ");
-		System.out.println(employee);
-		departmentService.incrementEmployeeCount(employee);
+
+	@RabbitListener(queues="#{indiaQueue.name}")
+	public void interestedInIndia(String msg) throws InterruptedException {
+		System.out.println("recieved msg for India "+msg);
 	}
 	
-	@RabbitListener(queues="#{deleteEmployee.name}")
-	public void decrementEmployeeCount(Employee employee) throws InterruptedException {
-		System.out.println("in decrementEmployeeCount ");
-		departmentService.decrementEmployeeCount(employee);
+	@RabbitListener(queues="#{indiaMaharashtraQueue.name}")
+	public void interestedInIndiaMaharashtra(String msg) throws InterruptedException {
+		System.out.println("recieved msg for India and Maharashtra "+msg);
+	}
+	
+	@RabbitListener(queues="#{thaneQueue.name}")
+	public void interestedInThane(String msg) throws InterruptedException {
+		System.out.println("recieved msg for Thane "+msg);
+	}
+	
+	@RabbitListener(queues="#{indiaThaneQueue.name}")
+	public void interestedInIndiaThane(String msg) throws InterruptedException {
+		System.out.println("recieved msg for India and Thane"+msg);
+	}
+	
+	@RabbitListener(queues="#{mumbaiQueue.name}")
+	public void interestedInMumbai(String msg) throws InterruptedException {
+		System.out.println("recieved msg for Mumbai "+msg);
 	}
 }
