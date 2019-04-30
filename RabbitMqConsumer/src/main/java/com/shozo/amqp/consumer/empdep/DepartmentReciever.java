@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Profile("empdep")
 @Service
-public class TopicService {
+public class DepartmentReciever {
 
 	@Autowired
 	DepartmentService departmentService;

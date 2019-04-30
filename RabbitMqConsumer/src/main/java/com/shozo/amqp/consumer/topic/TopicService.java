@@ -26,7 +26,7 @@ public class TopicService {
 	
 	@RabbitListener(queues="#{indiaThaneQueue.name}")
 	public void interestedInIndiaThane(String msg) throws InterruptedException {
-		System.out.println("recieved msg for India and Thane"+msg);
+		System.out.println("recieved msg for India and Thane "+msg);
 	}
 	
 	@RabbitListener(queues="#{mumbaiQueue.name}")

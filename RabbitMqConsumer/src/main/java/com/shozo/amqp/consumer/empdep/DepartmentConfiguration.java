@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Profile;
 
 @Profile("empdep")
 @Configuration
-public class TopicConfiguration {
+public class DepartmentConfiguration {
 	
 	@Bean
-	public TopicExchange fanout() {
-		return new TopicExchange("topic");
+	public DirectExchange direct() {
+		return new DirectExchange("direct");
 	}
 	
 	@Bean
@@ -33,13 +33,13 @@ public class TopicConfiguration {
 	}
 	
 	@Bean
-	public Binding addEmployeeBinding(TopicExchange exchange, Queue addEmployee) {
-		return BindingBuilder.bind(addEmployee).to(exchange).with("add.*");
+	public Binding addEmployeeBinding(DirectExchange exchange, Queue addEmployee) {
+		return BindingBuilder.bind(addEmployee).to(exchange).with("addEmp");
 	}
 	
 	@Bean
-	public Binding deleteEmployeeBinding(TopicExchange exchange, Queue deleteEmployee) {
-		return BindingBuilder.bind(deleteEmployee).to(exchange).with("delete.*");
+	public Binding deleteEmployeeBinding(DirectExchange exchange, Queue deleteEmployee) {
+		return BindingBuilder.bind(deleteEmployee).to(exchange).with("deleteEmp");
 	}
 	
     @Bean

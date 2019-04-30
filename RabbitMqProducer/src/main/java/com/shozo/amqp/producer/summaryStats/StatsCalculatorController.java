@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Profile("stats")
 @RestController
-@RequestMapping("producer")
+@RequestMapping("stats")
 public class StatsCalculatorController {
 
 	@Autowired

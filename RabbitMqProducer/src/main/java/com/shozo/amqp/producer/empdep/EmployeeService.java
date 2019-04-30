@@ -1,6 +1,8 @@
 package com.shozo.amqp.producer.empdep;
 
 import java.util.List;
+
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,11 @@ public class EmployeeService {
 	ObjectMapper mapper;
 	
 	@Autowired
-	TopicExchange exchange;
+	DirectExchange exchange;
 	
 	public void createEmployee(Employee e) {
 		dao.save(e);
-		rabbitTemplate.convertAndSend(exchange.getName(), "add.employee", e);
+		rabbitTemplate.convertAndSend(exchange.getName(), "addEmp", e);
 		System.out.println("send firstQueue successfull");
 	}
 
@@ -39,7 +41,7 @@ public class EmployeeService {
 		System.out.println("send SecondQueue successfull");
 		Employee e = dao.findById(eid).get();
 		dao.deleteById(eid);
-		rabbitTemplate.convertAndSend(exchange.getName(), "delete.employee", e);
+		rabbitTemplate.convertAndSend(exchange.getName(), "deleteEmp", e);
 		return e;
 	}
 

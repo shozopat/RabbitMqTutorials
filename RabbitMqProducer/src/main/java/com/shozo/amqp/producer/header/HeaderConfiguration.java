@@ -14,6 +14,6 @@ public class HeaderConfiguration {
 	
 	@Bean
 	public HeadersExchange header() {
-		return new HeadersExchange("headerExchange");
+		return new HeadersExchange("header");
 	}
 }
