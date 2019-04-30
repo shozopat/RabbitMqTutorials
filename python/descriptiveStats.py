@@ -38,13 +38,13 @@ def statsCalculator(filePath, cols, id):
 	
 #{'file': 'D:\\RabbitMq\\data\\timepass.csv2.csv', 'columns': 'age,salary,height,weight', 'id': '2'}
 def callback(ch, method, properties, body):
-	print(" [x] %r:%r" % (method.routing_key, body))
 	input = json.loads(body)
 	print(input)
 	colStr = input['columns']
 	cols = colStr.split(",")
 	result = statsCalculator(input['file'],cols,input['id'])
 	sendMessage(result)
+	ch.basic_ack(delivery_tag=method.delivery_tag)
 
 def sendMessage(result):
 	channel.queue_declare('resultQueue')
@@ -53,11 +53,12 @@ def sendMessage(result):
 	jsonOutput = json.dumps(result)
 	channel.basic_publish(exchange='direct', routing_key='statsResult', body=jsonOutput )
 	
+	
 channel.queue_declare('statsCalQueue')
 channel.queue_bind(exchange='direct', queue='statsCalQueue', routing_key='statsCal')
 print(' Waiting for Messages........')
 
-channel.basic_consume(queue='statsCalQueue', on_message_callback=callback, auto_ack=True)
+channel.basic_consume(queue='statsCalQueue', on_message_callback=callback, auto_ack=False)
 channel.start_consuming()
 
 
