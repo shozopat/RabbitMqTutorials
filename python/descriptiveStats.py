@@ -9,8 +9,8 @@ channel.exchange_declare(exchange='direct', exchange_type='direct', durable=True
 
 def statsCalculator(filePath, cols, id):
 	df = pd.read_csv(filePath)
+	print(cols)
 	columns=[];maxs = [];sums=[];mins=[];counts=[];medians=[];stddevs=[];vars=[];means=[];
-	cols=['age', 'salary', 'height', 'weight']
 	for col in cols:
 		columns.append(col)
 		medians.append(float(df[col].median()))
@@ -41,7 +41,9 @@ def callback(ch, method, properties, body):
 	print(" [x] %r:%r" % (method.routing_key, body))
 	input = json.loads(body)
 	print(input)
-	result = statsCalculator(input['file'],input['columns'],input['id'])
+	colStr = input['columns']
+	cols = colStr.split(",")
+	result = statsCalculator(input['file'],cols,input['id'])
 	sendMessage(result)
 
 def sendMessage(result):

@@ -92,11 +92,13 @@ profiles:
 
 basic
 fanout
-taskqueue
 direct
+topic
 header
 stats
-topic
+
+
+taskqueue
 
 java -jar -Dspring.profiles.active=basic target\RabbitMqProducer-1.0.0.jar --server.port=8081 
 java -jar -Dspring.profiles.active=basic target\RabbitMqConsumer-1.0.0.jar --server.port=8082
@@ -106,3 +108,5 @@ https://www.rabbitmq.com/queues.html
 https://www.cloudamqp.com/blog/2015-09-03-part4-rabbitmq-for-beginners-exchanges-routing-keys-bindings.html
 
 
+SepalLength,SepalWidth,PetalLength,PetalWidth
+age,salary,height,weight
